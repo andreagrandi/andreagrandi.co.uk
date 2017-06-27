@@ -6,7 +6,7 @@ Slug: creating-a-production-ready-api-with-python-and-django-rest-framework-part
 Status: published
 
 In the [previous
-part](https://www.andreagrandi.it/2016/10/01/creating-a-production-ready-api-with-python-and-django-rest-framework-part-2/)
+part]({filename}creating-a-production-ready-api-with-python-and-django-rest-framework-part-2.md)
 we implemented authentication, permissions and the possibility to POST
 new products for admins. In this new episode we will see how to
 implement **details** management, **relations** between models, **nested
@@ -15,9 +15,8 @@ APIs** and a different level of permissions.
 If you haven't completed the previous parts or if you want to begin from
 this one, checkout the right code first:
 
-``` {.lang:sh .decode:true}
-git checkout tutorial-1.10
-```
+    :::shell
+    git checkout tutorial-1.10
 
 ### Handling Product Details
 
@@ -30,62 +29,58 @@ As first thing we need to change the **ProductSerializer** to return the
 id of the product. Edit **catalog/serializers.py** and change the class
 in this way:
 
-``` {.lang:python .decode:true}
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ('id', 'name', 'description', 'price')
-```
+    :::python
+    class ProductSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Product
+            fields = ('id', 'name', 'description', 'price')
 
 After changing the serializer we need to implement a new view called
 **ProductDetail**. Edit **catalog/views.py** and add the following
 imports:
 
-``` {.lang:python .decode:true}
-from django.http import Http404
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-```
+    :::python
+    from django.http import Http404
+    from rest_framework.response import Response
+    from rest_framework.views import APIView
+    from rest_framework import status
 
 and the following class:
 
-``` {.lang:python .decode:true}
-class ProductDetail(APIView):
-    def get_object(self, pk):
-        try:
-            return Product.objects.get(pk=pk)
-        except Product.DoesNotExist:
-            raise Http404
+    :::python
+    class ProductDetail(APIView):
+        def get_object(self, pk):
+            try:
+                return Product.objects.get(pk=pk)
+            except Product.DoesNotExist:
+                raise Http404
 
-    def get(self, request, pk, format=None):
-        product = self.get_object(pk)
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
-
-    def put(self, request, pk, format=None):
-        product = self.get_object(pk)
-        serializer = ProductSerializer(product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+        def get(self, request, pk, format=None):
+            product = self.get_object(pk)
+            serializer = ProductSerializer(product)
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        product = self.get_object(pk)
-        product.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-```
+        def put(self, request, pk, format=None):
+            product = self.get_object(pk)
+            serializer = ProductSerializer(product, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        def delete(self, request, pk, format=None):
+            product = self.get_object(pk)
+            product.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 let's connect the new view to the urls, editing catalog/urls.py and
 changing the code in this way:
 
-``` {.lang:python .decode:true}
-urlpatterns = [
-    url(r'^products/$', views.ProductList.as_view()),
-    url(r'^products/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
-]
-```
+    :::python
+    urlpatterns = [
+        url(r'^products/$', views.ProductList.as_view()),
+        url(r'^products/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
+    ]
 
 If we try to **PUT**, **DELETE** or **GET** a product like
 **/products/1/** we can now update, delete or retrieve an existing item,
@@ -97,12 +92,11 @@ refactor **ProductDetail** with a
 generic class. Open **catalog/views.py** and change the class code in
 this way:
 
-``` {.lang:python .decode:true}
-class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = (IsAdminOrReadOnly, )
-```
+    :::python
+    class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Product.objects.all()
+        serializer_class = ProductSerializer
+        permission_classes = (IsAdminOrReadOnly, )
 
 That's it! With just three lines of code we have now implemented the
 same feature of the previous class, plus we have set the correct
@@ -110,9 +104,8 @@ permissions.
 
 To checkout the code at this point:
 
-``` {.lang:sh .decode:true}
-git checkout tutorial-1.12
-```
+    :::shell
+    git checkout tutorial-1.12
 
 ### Reviews - Relations between models
 
@@ -122,27 +115,24 @@ list of reviews for a specific product. To implement this feature we
 need to add a new model to our application. Edit **catalog/models.py**
 adding this import:
 
-``` {.lang:python .decode:true}
-from django.contrib.auth.models import User
-```
+    :::python
+    from django.contrib.auth.models import User
 
 and this Django model:
 
-``` {.lang:python .decode:true}
-class Review(models.Model):
-    product = models.ForeignKey(Product, related_name='reviews')
-    title = models.CharField(max_length=255)
-    review = models.TextField()
-    rating = models.IntegerField()
-    created_by = models.ForeignKey(User)
-```
+    :::python
+    class Review(models.Model):
+        product = models.ForeignKey(Product, related_name='reviews')
+        title = models.CharField(max_length=255)
+        review = models.TextField()
+        rating = models.IntegerField()
+        created_by = models.ForeignKey(User)
 
 after creating the model, please remember to create the related DB
 **migration**:
 
-``` {.lang:sh .decode:true}
-$ ./manage.py makemigrations catalog
-```
+    :::shell
+    $ ./manage.py makemigrations catalog
 
 When the model is ready, we have to do some changes to the serializers.
 First of all we need to write a new one, for our new **Review** model.
@@ -151,26 +141,25 @@ its related reviews. Each Product can have multiple Review. And each
 Review will be always linked to a specific Product. Edit
 **catalog/serializers.py** and change it in this way:
 
-``` {.lang:python .decode:true}
-from .models import Product, Review
-from rest_framework import serializers
+    :::python
+    from .models import Product, Review
+    from rest_framework import serializers
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-    created_by = serializers.ReadOnlyField(source='created_by.username')
+    class ReviewSerializer(serializers.ModelSerializer):
+        created_by = serializers.ReadOnlyField(source='created_by.username')
 
-    class Meta:
-        model = Review
-        fields = ('id', 'title', 'review', 'rating', 'created_by')
+        class Meta:
+            model = Review
+            fields = ('id', 'title', 'review', 'rating', 'created_by')
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True, read_only=True)
+    class ProductSerializer(serializers.ModelSerializer):
+        reviews = ReviewSerializer(many=True, read_only=True)
 
-    class Meta:
-        model = Product
-        fields = ('id', 'name', 'description', 'price', 'reviews')
-```
+        class Meta:
+            model = Product
+            fields = ('id', 'name', 'description', 'price', 'reviews')
 
 **Note:** in **ReviewSerializer** when we serialise the user contained
 in **created\_by** field, return the username instead of the id (to make
@@ -182,25 +171,23 @@ property. In this case we have set it to **reviews**.
 At this point we need to add a new view. Edit **catalog/views.py** and
 add the following imports:
 
-``` {.lang:python .decode:true}
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Product, Review
-from .serializers import ProductSerializer, ReviewSerializer
-```
+    :::python
+    from rest_framework.permissions import IsAuthenticatedOrReadOnly
+    from .models import Product, Review
+    from .serializers import ProductSerializer, ReviewSerializer
 
 then add this class:
 
-``` {.lang:python .decode:true}
-class ReviewList(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
+    :::python
+    class ReviewList(generics.ListCreateAPIView):
+        queryset = Review.objects.all()
+        serializer_class = ReviewSerializer
+        permission_classes = (IsAuthenticatedOrReadOnly, )
 
-    def perform_create(self, serializer):
-        serializer.save(
-            created_by=self.request.user,
-            product_id=self.kwargs['pk'])
-```
+        def perform_create(self, serializer):
+            serializer.save(
+                created_by=self.request.user,
+                product_id=self.kwargs['pk'])
 
 As you can notice, I had to customise the **perform\_create** method
 because the default one doesn't know anything about the fact we want to
@@ -208,20 +195,18 @@ set the **created\_by** and **product\_id** fields. Finally we need to
 bind this new view to a specific url, so we need to edit
 **catalog/urls.py** and add this:
 
-``` {.lang:python .decode:true}
+    :::python
     ...
-    url(r'^products/(?P<pk>[0-9]+)/reviews/$', views.ReviewList.as_view()),
-]
-```
+        url(r'^products/(?P<pk>[0-9]+)/reviews/$', views.ReviewList.as_view()),
+    ]
 
 At this point any authenticated user should be able to **POST a review**
 for a product and anyone should be able to get the **list of reviews**
 for each product. If you have any problem with the code and want to move
 to this point, please checkout this:
 
-``` {.lang:sh .decode:true}
-git checkout tutorial-1.13
-```
+    :::shell
+    git checkout tutorial-1.13
 
 ### Nested APIs details
 
@@ -231,33 +216,31 @@ implementing the new view, we need a little bit of refactoring and a new
 permission class. Edit **catalog/permissions.py** and add this new
 class:
 
-``` {.lang:python .decode:true}
-class IsOwnerOrReadOnly(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
+    :::python
+    class IsOwnerOrReadOnly(BasePermission):
+        def has_object_permission(self, request, view, obj):
+            if request.method in SAFE_METHODS:
+                return True
 
-        return obj.created_by == request.user
-```
+            return obj.created_by == request.user
 
 Basically this will permit changes to the review only to its author. Now
 we are going to add new urls and doing some refactoring at the same
 time. Edit **catalog/urls.py** and change the urls in this way:
 
-``` {.lang:python .decode:true}
-urlpatterns = [
-    url(r'^products/$', views.ProductList.as_view()),
-    url(r'^products/(?P<product_id>[0-9]+)/$', views.ProductDetail.as_view()),
-    url(
-        r'^products/(?P<product_id>[0-9]+)/reviews/$',
-        views.ReviewList.as_view()
-    ),
-    url(
-        r'^products/(?P<product_id>[0-9]+)/reviews/(?P<review_id>[0-9]+)/$',
-        views.ReviewDetail.as_view()
-    ),
-]
-```
+    :::python
+    urlpatterns = [
+        url(r'^products/$', views.ProductList.as_view()),
+        url(r'^products/(?P<product_id>[0-9]+)/$', views.ProductDetail.as_view()),
+        url(
+            r'^products/(?P<product_id>[0-9]+)/reviews/$',
+            views.ReviewList.as_view()
+        ),
+        url(
+            r'^products/(?P<product_id>[0-9]+)/reviews/(?P<review_id>[0-9]+)/$',
+            views.ReviewDetail.as_view()
+        ),
+    ]
 
 You may have noticed that I substituted **pk** with **product\_id**. In
 the latest url I added, we need to be able to identify two primary keys:
@@ -265,16 +248,15 @@ the one for the product and the one for the review. I renamed the
 previous ones for consistency. Now it's time to add the new view for
 Review details. Edit **catalog/view.py** and add this class:
 
-``` {.lang:python .decode:true}
-class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ReviewSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
-    lookup_url_kwarg = 'review_id'
+    :::python
+    class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+        serializer_class = ReviewSerializer
+        permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+        lookup_url_kwarg = 'review_id'
 
-    def get_queryset(self):
-        review = self.kwargs['review_id']
-        return Review.objects.filter(id=review)
-```
+        def get_queryset(self):
+            review = self.kwargs['review_id']
+            return Review.objects.filter(id=review)
 
 What are we doing here? You may have noticed that we set a new property
 called **lookup\_url\_kwarg**. That property is being used to determine
@@ -289,9 +271,8 @@ here <https://github.com/andreagrandi/drf-tutorial/blob/541bf31c11fd1dbf2bcc1d3
 
 In alternative, you can fetch the whole source code at this point:
 
-``` {.lang:sh .decode:true}
-git checkout tutorial-1.14
-```
+    :::shell
+    git checkout tutorial-1.14
 
 ### Wrapping Up
 
