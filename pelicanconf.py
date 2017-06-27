@@ -39,3 +39,4 @@ ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 DISPLAY_CATEGORIES_ON_MENU = False
+STATIC_PATHS = ['images']
