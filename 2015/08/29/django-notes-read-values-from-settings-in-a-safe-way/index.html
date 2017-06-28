@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -14,10 +14,14 @@
         <header id="banner" class="body">
                 <h1><a href="/">Andrea Grandi </a></h1>
                 <nav><ul>
-                    <li><a href="/about/">About</a></li>
-                    <li><a href="/curriculum/">Curriculum</a></li>
-                    <li><a href="/pgp-key/">PGP Key</a></li>
-                </ul></nav>
+    
+                        <li><a href="/about/">About</a></li>
+    
+                        <li><a href="/curriculum/">Curriculum</a></li>
+    
+                        <li><a href="/pgp-key/">PGP Key</a></li>
+                </ul>
+                </nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
@@ -29,15 +33,8 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-08-29T15:50:00+01:00">
-                Published: Sat 29 August 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/admin.html">admin</a>
-        </address>
-<p>In <a href="/category/django-howto-programmazione-python.html">Django, HowTo, Programmazione, Python</a>.</p>
-<p>tags: <a href="/tag/django.html">Django</a> <a href="/tag/getattr.html">getattr</a> <a href="/tag/python.html">Python</a> <a href="/tag/settings.html">settings</a> </p>
+        <span>Sat 29 August 2015</span>
+<span>| tags: <a href="/tag/django.html">Django</a><a href="/tag/getattr.html">getattr</a><a href="/tag/python.html">Python</a><a href="/tag/settings.html">settings</a></span>
 </footer><!-- /.post-info -->      <p>Working on <strong>Django</strong> projects I find very often that many developers
 access the values that are defined in <strong>settings</strong> in this way</p>
 <p>``` {.lang:python .decode:true}
@@ -67,7 +64,7 @@ if the value doesn't exist <strong>my_value</strong> will be assigned with
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
-                        <h2>links</h2>
+                        <h2>blogroll</h2>
                         <ul>
                             <li><a href="http://getpelican.com/">Pelican</a></li>
                             <li><a href="http://python.org/">Python.org</a></li>
@@ -86,11 +83,7 @@ if the value doesn't exist <strong>my_value</strong> will be assigned with
         </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme <a href="https://github.com/blueicefield/pelican-blueidea/">blueidea</a>, inspired by the default theme.</p>
         </footer><!-- /#contentinfo -->
 
 </body>
