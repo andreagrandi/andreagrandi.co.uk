@@ -4,7 +4,7 @@ Author: admin
 Slug: about
 Status: published
 
-[![Andy\_avatar](https://www.andreagrandi.it/wp-content/uploads/2008/01/andy_sportstracker.jpg)](https://www.andreagrandi.it/about/andy_avatar/ "Andy_avatar")
+[![Andy\_avatar]({filename}/images/2008/01/andy_sportstracker.thumbnail.jpg)]({filename}/images/2008/01/andy_sportstracker.jpg "Andy_avatar")
 
 My name is **Andrea Grandi**, I'm 36 and I live in **London (UK)**. I
 work as **Python/Django** developer for a company based in London.
