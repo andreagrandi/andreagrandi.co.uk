@@ -40,3 +40,4 @@ PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 DISPLAY_CATEGORIES_ON_MENU = False
 STATIC_PATHS = ['images']
+THEME = 'themes/pelican-blueidea'
