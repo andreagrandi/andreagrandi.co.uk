@@ -42,3 +42,7 @@ DISPLAY_CATEGORIES_ON_MENU = False
 STATIC_PATHS = ['images', 'extra/CNAME']
 EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'}, }
 THEME = 'themes/pelican-blueidea'
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['tipue_search']
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
+DISPLAY_SEARCH_FORM = True
