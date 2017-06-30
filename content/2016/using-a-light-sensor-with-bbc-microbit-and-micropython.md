@@ -1,8 +1,8 @@
 Title: Using a light sensor with BBC micro:bit and MicroPython
 Date: 2016-02-08 22:49
-Author: admin
-Category: Development, HowTo, Microbit, Python
-Tags: bbc, breadboard, embedded, microbit, micropython
+Author: Andrea Grandi
+Category: Development
+Tags: bbc, breadboard, embedded, microbit, micropython, howto, python
 Slug: using-a-light-sensor-with-bbc-microbit-and-micropython
 Status: published
 
@@ -14,8 +14,7 @@ build this circuit you will need a **breadboard**, **3 jumper wires**, a
 **10k resistance** and possibly a **[Kitronik breadboard
 kit](https://www.kitronik.co.uk/5609-prototyping-system-for-the-bbc-microbit.html)**.
 
-The project
------------
+### The project
 
 I wanted to realise a simple project where, depending on the light
 intensity captured by the light sensor, the **micro:bit** shows an image
@@ -24,19 +23,13 @@ the light is less intense.
 
 Here is the complete **circuit scheme**:
 
-[![microbit\_breadboard\_schema\_light](https://www.andreagrandi.it/wp-content/uploads/2016/02/microbit_breadboard_schema_light.png){.aligncenter
-.wp-image-1117 width="300"
-height="318"}](https://www.andreagrandi.it/wp-content/uploads/2016/02/microbit_breadboard_schema_light.png)
+[![microbit\_breadboard\_schema\_light]({filename}/images/2016/02/microbit_breadboard_schema_light.png){ width=40% }]({filename}/images/2016/02/microbit_breadboard_schema_light.png)
 
-###### "Image Copyright © Kitronik" {#image-copyright-kitronik style="text-align: center;"}
-
- 
+###### "Image Copyright © Kitronik"
 
 and here is a picture of the **finished project** I created:
 
-[![microbit\_breadboard\_example\_2](https://www.andreagrandi.it/wp-content/uploads/2016/02/microbit_breadboard_example_2.jpg){.aligncenter
-.wp-image-1118 width="300"
-height="400"}](https://www.andreagrandi.it/wp-content/uploads/2016/02/microbit_breadboard_example_2.jpg)
+[![microbit\_breadboard\_example\_2]({filename}/images/2016/02/microbit_breadboard_example_2.jpg){ width=40% }]({filename}/images/2016/02/microbit_breadboard_example_2.jpg)
 
 The **source code** I needed is available here:
 
