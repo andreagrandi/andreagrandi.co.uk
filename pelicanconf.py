@@ -49,3 +49,5 @@ PLUGIN_PATHS = ['plugins']
 PLUGINS = ['tipue_search']
 DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
 DISPLAY_SEARCH_FORM = True
+DISPLAY_CATEGORIES_ON_POSTINFO = True
+DISQUS_SITENAME = 'andreagrandi'
