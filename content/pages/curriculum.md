@@ -1,11 +1,10 @@
 Title: Curriculum
 Date: 2008-01-04 13:23
-Author: admin
+Author: Andrea Grandi
 Slug: curriculum
 Status: published
 
-Profile
--------
+### Profile
 
 -   Name: **Andrea Grandi**
 -   Where I live: London, UK
@@ -25,8 +24,7 @@ code, pairing and mentoring junior developers.
 
 ### **Current position:** Software Developer at Government Digital Service (London)
 
-Skills
-------
+### Skills
 
 -   languages: Python, Go, C\#, Java, C++
 -   frameworks: Django, Django Rest Framework, Flask
@@ -36,36 +34,35 @@ Skills
 -   cloud and PaaS: Amazon AWS, Heroku, CloudFoundry, Docker
 -   automation: Ansible
 
-Professional Experience
------------------------
+### Professional Experience
 
-**November 2016 / present - Software Developer at Government Digital
-Service (London):** Working in the Data division of GDS as Software
+**November 2016 / present - Software Developer at Government Digital Service (London):** 
+Working in the Data division of GDS as Software
 Developer in a team of data scientists. My role is to help the team to
 deliver well structured Python applications, mentor other developers and
 bootstrap new projects.
 
-**February 2016 / November 2016 - Software Engineer at Marks & Spencer
-(London):** Working in the “Quick Order” team to deliver a Python/Django
+**February 2016 / November 2016 - Software Engineer at Marks & Spencer (London):** 
+Working in the “Quick Order” team to deliver a Python/Django
 based tool used internally by the customer care. I’m also working on the
 Android version of Quick Store used by staff in stores. The aim of Quick
 Order was to build an end to end journey on top of APIs and help the API
 team to build a reliable platform that is now being used by customer
 facing products.
 
-**June 2015 / February 2016 - Python/Django developer at Plentific
-(London):** I worked on the Python/Django backend of the website
+**June 2015 / February 2016 - Python/Django developer at Plentific (London):**
+I worked on the Python/Django backend of the website
 plentific.com, a property service market partner of Zoopla and Prime
 Location. We used Django Rest Framework for the API and PostgreSQL for
 the database.
 
-**March 2015 / May 2015 - Python/Django, Go Platform Engineer at Yoyo
-(London):** As a Platform Engineer, I worked on the backend
+**March 2015 / May 2015 - Python/Django, Go Platform Engineer at Yoyo (London):**
+As a Platform Engineer, I worked on the backend
 implementation of the product, developing the API with Python and using
 Go to write complementary micro services.
 
-**April 2013 / March 2015 - Python/Django backend developer at Glow
-(London):** I helped maintaining the backend code of our main product
+**April 2013 / March 2015 - Python/Django backend developer at Glow (London):**
+I helped maintaining the backend code of our main product
 “Glow Machine” and played an important role in the development of a new
 application, developing the rest API and interacting with other API
 services. All these products were mainly developed in Python/Django
@@ -101,8 +98,8 @@ developed applications in C\# and Vb.Net languages. The kind of
 application I developed are web applications, desktop applications
 and embedded applications (with .Net Compact Framework).
 
-**August 2003 / January 2004 - Software Developer for Orange
-Informatica:** I developed applications in Visual Basic 6 and Visual
+**August 2003 / January 2004 - Software Developer for Orange Informatica:**
+I developed applications in Visual Basic 6 and Visual
 Basic.Net, Microsoft Access applications and a little of PHP/MySQL.
 
 **August 2002 / July 2003 - Software Developer for Levon Italia:** I
@@ -113,7 +110,7 @@ System Administrator for their Linux server.
 been a software developer at Softec S.r.l. for the Audiotex customer (an
 important local Call Center).
 
-### Projects and Open Source Contributions {#projects-and-open-source-contributions style="text-align: left;"}
+### Projects and Open Source Contributions
 
 I’ve been a strong contributor to open source project for almost a
 decade and I’m currently working on some Python related libraries and
@@ -124,14 +121,14 @@ founded and managed the Linux User Group of my home town (Pistoia) for
 Community and recently in the Python Community. All open source projects
 I’ve contributed to are available on my GitHub profile.
 
-### Other roles {#other-roles style="text-align: left;"}
+### Other roles
 
 Between 2005 and 2008 I worked as a system administrator consultant
 (Linux systems), I managed the **Pistoia Wireless** project, I taught
 programming at a local school and I wrote articles for an italian Linux
 magazine.
 
-### Conferences and Talks {#conferences-and-talks style="text-align: left;"}
+### Conferences and Talks
 
 -   **September 2016** - Getting Started with requests HTTP library
     (PyCon UK)
@@ -152,4 +149,3 @@ magazine.
 -   **Italian:** native
 -   **English:** fluent
 -   **Spanish:** basic
-
