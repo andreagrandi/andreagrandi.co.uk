@@ -1,8 +1,8 @@
 Title: Getting started with Digital Ocean VPS: configuring DNS and Postfix for email forwarding
 Date: 2014-08-31 17:02
-Author: admin
+Author: Andrea Grandi
 Category: HowTo
-Tags: dns, postfix, vps
+Tags: dns, postfix, vps, howto, digitalocean, email
 Slug: getting-started-with-digital-ocean-vps-configuring-dns-and-postfix-for-email-forwarding
 Status: published
 
@@ -15,8 +15,7 @@ In my case I only needed: SSH access, LEMP configuration (Nginx + MySQL
 + PHP) to serve my WordPress blog and Postfix to use email forwarding
 from my aliases to my personal email.
 
-Configuring DNS on Digital Ocean
---------------------------------
+### Configuring DNS on Digital Ocean
 
 Understanding how to properly configure the DNS entries in the panel
 could be a bit tricky if it's not your daily bread. In particular there
@@ -33,19 +32,15 @@ at the end of the domain name). Here is the configuration of my own
 droplet (you will notice also a CNAME record. You need it if you want
 www.yourdomain.com to correctly point to your ip.
 
-[![dns\_config\_digitalocean](https://www.andreagrandi.it/wp-content/uploads/2014/08/dns_config_digitalocean.jpg){.aligncenter
-.wp-image-847 width="705"
-height="378"}](https://www.andreagrandi.it/wp-content/uploads/2014/08/dns_config_digitalocean.jpg)
+[![dns\_config\_digitalocean]({filename}/2014/08/dns_config_digitalocean.jpg){ width=40% }]({filename}/2014/08/dns_config_digitalocean.jpg)
 
- 
-
-Configuring Postfix
--------------------
+### Configuring Postfix
 
 In my case I only needed some aliases that I use to forward emails to my
 GMail account, so the configuration is quite easy. First you need to
 install Postfix:
 
+    :::shell
     sudo apt-get install postfix
 
 Then you need to edit** /etc/postfix/main.cf** customizing myhostname
@@ -58,21 +53,23 @@ configuration here:
 <p>
 <script src="https://gist.github.com/andreagrandi/fe6246dac228250ee2c0.js"></script>
 </p>
-Add your email aliases
+
+### Add your email aliases
 
 Edit **/etc/postfix/virtual** file and add your aliases, one per line,
 like in this example:
 
+    :::shell
     info@yourdomain.com youremail@gmail.com
     sales@yourdomain.com youremail@gmail.com
 
 At this point update the alias map and reload Postfix configuration:
 
+    :::shell
     sudo postmap /etc/postfix/virtual
     sudo /etc/init.d/postfix reload
 
-Conclusion
-----------
+### Conclusion
 
 As you can see, configuring Postfix is quite easy, you just need to be
 careful when you configure the DNS records in the control panel. Are you
