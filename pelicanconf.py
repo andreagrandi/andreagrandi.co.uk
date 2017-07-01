@@ -29,7 +29,8 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (('twitter', 'https://twitter.com/andreagrandi'),
           ('github', 'https://github.com/andreagrandi'),)
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 4
+SUMMARY_MAX_LENGTH = None
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
