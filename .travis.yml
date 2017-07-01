@@ -10,7 +10,6 @@ script:
 - pelican content -o output -s publishconf.py
 notifications:
   email:
-    on_success: always
     on_failure: always
 env:
   global:
